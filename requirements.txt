@@ -9,4 +9,6 @@ matplotlib
 plotly.express
 plotly
 nbformat
+catboost
+xgboost
 #-e .
