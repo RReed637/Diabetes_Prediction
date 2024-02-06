@@ -11,4 +11,5 @@ plotly
 nbformat
 catboost
 xgboost
+dill
 #-e .
