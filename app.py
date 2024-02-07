@@ -33,8 +33,5 @@ results = prediction
 # Web Application
 def app():
     st.subheader('Prediction: ')
-    if results <1:
-        st.write('You are most likely not diabetic')
-    else: 
-        st.write('You may suffer from Diabetes. We suggest you consult a doctor.')
+    print(results)
 app()
