@@ -19,8 +19,10 @@ def prediction():
     predict_pipeline=PredictPipeline()
     results=predict_pipeline.predict(pred_df)
 
-    return results, pred_df
     
+    return prediction
+
+results = prediction
 
 
 
@@ -30,8 +32,6 @@ def prediction():
 
 # Web Application
 def app():
-    st.subheader('User Inputs:')
-    st.write()
     st.subheader('Prediction: ')
     if results <1:
         st.write('You are most likely not diabetic')
