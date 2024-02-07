@@ -12,4 +12,6 @@ nbformat
 catboost
 xgboost
 dill
+flask
+pickle-mixin
 #-e .

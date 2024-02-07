@@ -71,7 +71,9 @@ class DataTransformation:
         
         try:
             train_df=pd.read_csv(train_path)
+            train_df=train_df.drop(columns="smoking_history")
             test_df=pd.read_csv(test_path)
+            test_df=test_df.drop(columns="smoking_history")
 
             logging.info("Read train and test data completed")
 
