@@ -14,12 +14,12 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 @dataclass
-class datatransformationConfig:
+class DatatransformationConfig:
     preprocessor_ob_file_path=os.path.join('artifact', "preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
-        self.data_transformation_config=datatransformationConfig()
+        self.data_transformation_config=DatatransformationConfig()
 
     def get_data_transformer_object(self):
         '''This function is responsible for data transformation'''
@@ -88,8 +88,14 @@ class DataTransformation:
                 "blood_glucose_level"
             ]
 
-            input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
-            target_feature_train_df=train_df[target_column_name]
+            majority_class = train_df[train_df[target_column_name] == 0]
+            minority_class = train_df[train_df[target_column_name] == 1]
+
+            minority_upsampled = resample(minority_class, replace=True)
+            balanced_train_df = pd.concat([majority_class,minority_upsampled])
+
+            input_feature_train_df=balanced_train_df.drop(columns=[target_column_name],axis=1)
+            target_feature_train_df=balanced_train_df[target_column_name]
 
             input_feature_test_df = test_df.drop(columns=[target_column_name],axis=1)
             target_feature_test_df = test_df[target_column_name]
