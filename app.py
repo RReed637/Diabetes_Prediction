@@ -9,7 +9,7 @@ hypertension = st.selectbox('Do you have hypertension:', ("Yes", "No")),
 bmi = st.slider('Your BMI:', min_value= 1, max_value = 100, step=10),
 heart_disease = st.selectbox('Have you contracted Heart Disease?:',    ("Yes", "No")),
 HbA1c_level = st.slider('What is your HbA1c Level (Average Blood Sugar Levels for the last two to three months):', 1,10, 1),
-blood_glucose_level = st.slider('What is your Blood Glucose Level (Blood Sugar level):', (50, 300, 5))
+blood_glucose_level = st.slider('What is your Blood Glucose Level (Blood Sugar level):', 50, 300, 5)
 def prediction():
     data=CustomData(
         gender = st.selectbox('Select Sex', ("Male", "Female")),
