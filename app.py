@@ -10,7 +10,8 @@ def prediction():
         bmi = main.bmi,
         heart_disease = main.heart_disease,
         HbA1c_level = main.HbA1c_level,
-        blood_glucose_level = main.blood_glucos_level
+        blood_glucose_level = main.blood_glucos_level)
+    
     pred_df=data.get_data_as_frame()    
     predict_pipeline=PredictPipeline()
     results=predict_pipeline.predict(pred_df)
