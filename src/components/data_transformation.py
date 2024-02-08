@@ -26,12 +26,11 @@ class DataTransformation:
         try: 
             numerical_columns = [
                 "age",
-                "hypertension",
-                "heart_disease",
                 "bmi","HbA1c_level",
                 "blood_glucose_level"
             ]
-            cat_columns = ["gender","smoking_history"]
+            cat_columns = ["gender","hypertension",
+                "heart_disease",]
 
             num_pipeline = Pipeline(
                 steps=[
@@ -44,7 +43,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                 ("imputer",SimpleImputer(strategy="most_frequent")),
-                ("one_hot_encoder", OneHotEncoder()),
+                ("one_hot_encoder", OneHotEncoder(handle_unknown='ignore')),
                 ("scaler",StandardScaler(with_mean=False))
                 ]
                 
@@ -71,9 +70,8 @@ class DataTransformation:
         
         try:
             train_df=pd.read_csv(train_path)
-            train_df=train_df.drop(columns="smoking_history")
             test_df=pd.read_csv(test_path)
-            test_df=test_df.drop(columns="smoking_history")
+        
 
             logging.info("Read train and test data completed")
 
@@ -84,8 +82,6 @@ class DataTransformation:
             
             numerical_columns = [
                 "age",
-                "hypertension",
-                "heart_disease",
                 "bmi","HbA1c_level",
                 "blood_glucose_level"
             ]

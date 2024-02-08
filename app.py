@@ -1,37 +1,58 @@
-import streamlit as st
+from flask import Flask,request,render_template
+import numpy as np
 import pandas as pd
+
+from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
-st.title("""Screening Application for Diabetes""")
+application=Flask(__name__)
 
-def prediction():
-    data=CustomData(
-        gender = st.sidebar.selectbox('Select Sex', ("Male", "Female")),
-        age = st.sidebar.slider('Your Age:', min_value = 1, max_value = 100, step=5 ),
-        hypertension = st.sidebar.selectbox('Do you have hypertension:', ("Yes", "No")),
-        bmi = st.sidebar.slider('Your BMI:', min_value= 1, max_value = 100, step=10),
-        heart_disease = st.sidebar.selectbox('Have you contracted Heart Disease?:',    ("Yes", "No")),
-        HbA1c_level = st.sidebar.slider('What is your HbA1c Level (Average Blood Sugar Levels for the last two to three months):', 1,10, 1),
-        blood_glucose_level = st.sidebar.slider('What is your Blood Glucose Level (Blood Sugar level):', (50, 300, 5))
-    )
-    pred_df=data.get_data_as_frame()    
+app=application
 
-    predict_pipeline=PredictPipeline()
-    results=predict_pipeline.predict(pred_df)
+## Route for a home page
+
+@app.route('/')
+def index():
+    return render_template('index.html') 
+
+@app.route('/predictdata',methods=['GET','POST'])
+def predict_datapoint():
+    if request.method=='GET':
+        return render_template('home.html')
+    else:
+        data=CustomData(
+            gender=request.form.get('gender'),
+            age=float(request.form.get('age')),
+            hypertension=request.form.get('hypertension'),
+            bmi=float(request.form.get('bmi')),
+            heart_disease=request.form.get('heart_disease'),
+            HbA1c_level=float(request.form.get('HbA1c_level')),
+            blood_glucose_level=float(request.form.get('blood_glucose_level'))
+
+        )
+        pred_df=data.get_data_as_data_frame()
+        print(pred_df)
+        print("Before Prediction")
+
+        predict_pipeline=PredictPipeline()
+        print("Mid Prediction")
+        results=predict_pipeline.predict(pred_df)
+        print("after Prediction")
+        if (results[0]==0):
+            
+            results = str("Not Diabetic")
+            print(results)
+        else:
+            results = str("Diabetic")
+            print(results)
+        return render_template('home.html', results=results)
+                               
+    
+
+if __name__=="__main__":
+    app.run(host="0.0.0.0",debug=True)        
+
+
+
 
     
-    return prediction
-
-results = prediction
-
-
-
-
-
-    
-
-# Web Application
-def app():
-    st.subheader('Prediction: ')
-    print(results)
-app()

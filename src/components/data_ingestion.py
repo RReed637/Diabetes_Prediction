@@ -26,6 +26,7 @@ class DataIngestion:
         logging.info("Entered the data ingestion method or component")
         try:
             df=pd.read_csv('Notebook\Data\diabetes_prediction_dataset.csv') #reads in data
+            df = df.drop(columns=["smoking_history"])
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.Ingestion_config.train_data_path),exist_ok=True)
