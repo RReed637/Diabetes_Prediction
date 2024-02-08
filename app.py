@@ -4,7 +4,7 @@ from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 st.title("""Screening Application for Diabetes""")
 def prediction():
     data=CustomData(
-        gender = st.sidebar.selectbox('Select Sex', ("Male", "Female")),
+        gender: main.gender,
         age = st.sidebar.slider('Your Age:', min_value = 1, max_value = 100, step=5 ),
         hypertension = st.sidebar.selectbox('Do you have hypertension:', ("Yes", "No")),
         bmi = st.sidebar.slider('Your BMI:', min_value= 1, max_value = 100, step=10),
