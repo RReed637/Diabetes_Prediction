@@ -1,0 +1,77 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Diabetes Prediction Applicationr</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Diabetes Predction<legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                <option value="male">
+                    Male
+                </option>
+                <option value="female">
+                    Female
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input class="form-control" type="number" name="age"
+                placeholder="Enter your age" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Hypertension</label>
+            <select class="form-control" name="hypertension"
+                placeholder="Do you have Hypertension" required>
+                <option class="placeholder" selected disabled value="">Select whether you have hypertension</option>
+                <option value="yes">
+                    Yes
+                </option>
+                <option value="no">
+                    No
+                </option>
+                </option>
+            </select>
+        </div>
+         <div class="mb-3">
+            <label class="form-label">bmi</label>
+            <input class="form-control" type="number" name="bmi"
+                placeholder="Enter your bmi" min='0' max='200' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Heart Disease</label>
+            <select class="form-control" name="heart_disease" placeholder="Do you have Heart Disease"
+                required>
+                <option class="placeholder" selected disabled value="">select yes or no</option>
+                <option value="yes">
+                    Yes
+                </option>
+                <option value="no">
+                    No
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">HbA1c_Level</label>
+            <input class="form-control" type="number" name="HbA1c_level"
+                placeholder="Enter your HbA1c_level" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Blood Glucose Level</label>
+            <input class="form-control" type="number" name="blood_glucose_level"
+                placeholder="Enter your Blood Glucose Level" min='0' max='600' />
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your Maths Score" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
