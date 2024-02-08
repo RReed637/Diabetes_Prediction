@@ -4,9 +4,9 @@ from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 st.title("""Screening Application for Diabetes""")
 def prediction():
     data=CustomData(
-        gender: main.gender,
-        age = st.sidebar.slider('Your Age:', min_value = 1, max_value = 100, step=5 ),
-        hypertension = st.sidebar.selectbox('Do you have hypertension:', ("Yes", "No")),
+        gender = main.gender,
+        age = main.age,
+        hypertension = main.hypertension,
         bmi = st.sidebar.slider('Your BMI:', min_value= 1, max_value = 100, step=10),
         heart_disease = st.sidebar.selectbox('Have you contracted Heart Disease?:',    ("Yes", "No")),
         HbA1c_level = st.sidebar.slider('What is your HbA1c Level (Average Blood Sugar Levels for the last two to three months):', 1,10, 1),
